@@ -57,9 +57,9 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
     // database
-    const database = client.db("taskDB"); 
-    const usersCollection = database.collection("usersCollection"); 
-    const tasksCollection = database.collection("tasksCollection"); 
+    const database = client.db("taskDB");
+    const usersCollection = database.collection("usersCollection");
+    const tasksCollection = database.collection("tasksCollection");
 
     // jwt token generate (only for personal info based route)
     app.post("/jwt", (req, res) => {
@@ -100,24 +100,29 @@ async function run() {
       res.send("Sent Database Data based on paramas email");
     });
 
-
-
-
-
-
     // read Operation
     app.get("/", (req, res) => {
       res.send("Server Connected Successfully");
     });
 
-    // tasks
-    app.get("/tasks", async(req, res) => {
-      const {email, category} = req.query;
-      const result = await tasksCollection.find({email, category}).toArray();
+    // tasksTodo
+    app.get("/tasksTodo", async (req, res) => {
+      const { email, category } = req.query;
+      console.log(email, category);
+
+      const result = await tasksCollection.find({ email, category }).toArray();
+      console.log(result);
       res.send(result);
     });
 
-
+    // tasksProgress
+    app.get("/tasksProgress", async (req, res) => {
+      const { email, category } = req.query;
+      console.log(email, category);
+      const result = await tasksCollection.find({ email, category }).toArray();
+      console.log(result);
+      res.send(result); 
+    });
 
 
 
@@ -137,36 +142,25 @@ async function run() {
       res.send(result);
     });
 
-
     // task
-    app.post("/tasks", async(req, res) => {
+    app.post("/tasks", async (req, res) => {
       const task = req.body;
       const result = await tasksCollection.insertOne(task);
       res.send(result);
-    })
+    });
 
-
-
-
-
-     // update Operation 
-     app.patch("/tasks/:id", async(req, res) => {
+    // update Operation
+    app.patch("/tasks/:id", async (req, res) => {
       const id = req.params.id;
-      const title = req.body.title
-      const query = {_id: new ObjectId(id)};
+      const title = req.body.title;
+      const query = { _id: new ObjectId(id) };
       const updatedTitle = {
-        $set: {title}
-      }
+        $set: { title },
+      };
 
       const result = await tasksCollection.updateOne(query, updatedTitle);
       res.send(result);
-     })
-
-
-
-
-
-
+    });
   } finally {
   }
 }
