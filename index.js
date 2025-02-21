@@ -1,7 +1,7 @@
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
-const { MongoClient, ServerApiVersion } = require("mongodb");
+const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const express = require("express");
 const cors = require("cors");
 const app = express();
@@ -15,6 +15,7 @@ app.use(
       "http://localhost:5173",
       "http://localhost:5174",
       "http://localhost:5175",
+      "https://clearify-official.vercel.app",
     ],
     credentials: true,
   })
@@ -58,6 +59,7 @@ async function run() {
     // database
     const database = client.db("taskDB"); 
     const usersCollection = database.collection("usersCollection"); 
+    const tasksCollection = database.collection("tasksCollection"); 
 
     // jwt token generate (only for personal info based route)
     app.post("/jwt", (req, res) => {
@@ -98,10 +100,26 @@ async function run() {
       res.send("Sent Database Data based on paramas email");
     });
 
+
+
+
+
+
     // read Operation
     app.get("/", (req, res) => {
       res.send("Server Connected Successfully");
     });
+
+    // task
+    app.get("/tasks", async(req, res) => {
+      const result = await tasksCollection.find().toArray();
+      res.send(result);
+    });
+
+
+
+
+
 
     // create Operation (create User)
     app.post("/users", async (req, res) => {
@@ -117,6 +135,31 @@ async function run() {
       const result = await usersCollection.insertOne(user);
       res.send(result);
     });
+
+
+    // task
+    app.post("/tasks", async(req, res) => {
+      const task = req.body;
+      const result = await tasksCollection.insertOne(task);
+      res.send(result);
+    })
+
+
+
+
+
+     // update Operation 
+     app.patch("/tasks/:id", async(req, res) => {
+      const id = req.params.id;
+      const title = req.body.title
+      const query = {_id: new ObjectId(id)};
+      const updatedTitle = {
+        $set: {title}
+      }
+
+      const result = await tasksCollection.updateOne(query, updatedTitle);
+      res.send(result);
+     })
 
 
 
