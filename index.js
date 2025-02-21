@@ -110,9 +110,10 @@ async function run() {
       res.send("Server Connected Successfully");
     });
 
-    // task
+    // tasks
     app.get("/tasks", async(req, res) => {
-      const result = await tasksCollection.find().toArray();
+      const {email, category} = req.query;
+      const result = await tasksCollection.find({email, category}).toArray();
       res.send(result);
     });
 
