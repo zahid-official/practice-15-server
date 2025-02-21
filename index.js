@@ -108,19 +108,21 @@ async function run() {
     // tasksTodo
     app.get("/tasksTodo", async (req, res) => {
       const { email, category } = req.query;
-      console.log(email, category);
-
       const result = await tasksCollection.find({ email, category }).toArray();
-      console.log(result);
       res.send(result);
     });
 
     // tasksProgress
     app.get("/tasksProgress", async (req, res) => {
       const { email, category } = req.query;
-      console.log(email, category);
       const result = await tasksCollection.find({ email, category }).toArray();
-      console.log(result);
+      res.send(result); 
+    });
+
+    // tasksCompleted
+    app.get("/tasksCompleted", async (req, res) => {
+      const { email, category } = req.query;
+      const result = await tasksCollection.find({ email, category }).toArray();
       res.send(result); 
     });
 
