@@ -1,4 +1,4 @@
-# Clearify - Task Management Application (ServerSide)
+# Clearify - Task Management Application (Server-Side)
 
 The server-side of Clearify is built with **Express.js** and connects to a **MongoDB** database. It provides secure API endpoints for managing tasks (CRUD operations) and ensures real-time syncing using MongoDB Change Streams or WebSockets. User-specific data is protected using Firebase Authentication tokens.
 
