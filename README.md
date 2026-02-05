@@ -17,7 +17,7 @@
 
 ## 📋 Overview
 
-**Clearify Server** is a robust RESTful API backend powering the Clearify task management application. Built with modern technologies and best practices, it provides secure authentication, real-time data synchronization, and efficient CRUD operations for task management. The server ensures user-specific data protection, seamless performance, and scalability for production-ready applications.
+**Clearify Server** is a robust RESTful API backend powering the Clearify task management application. Built with modern technologies and best practices, it provides secure authentication, real-time data synchronization and efficient CRUD operations for task management. The server ensures user-specific data protection, seamless performance and scalability for production-ready applications.
 
 ---
 
@@ -35,7 +35,7 @@
 
 - **WebSocket Implementation** - Instant task updates across connected clients
 - **MongoDB Change Streams** - Real-time database monitoring for live synchronization
-- **Event-Driven Architecture** - Push notifications for task changes, additions, and deletions
+- **Event-Driven Architecture** - Push notifications for task changes, additions and deletions
 - **Low Latency Communication** - Optimized for minimal delay in data transmission
 
 ### 🗄️ Database Operations
@@ -337,7 +337,7 @@ This project demonstrates expertise in:
  **Database Management** - MongoDB operations and schema design  
  **Authentication** - Firebase Admin SDK and JWT validation  
  **Real-Time Communication** - WebSocket implementation and Change Streams  
- **Security Best Practices** - Token validation, CORS, and environment variables  
+ **Security Best Practices** - Token validation, CORS and environment variables  
  **Deployment** - Serverless deployment on Vercel platform  
 
 ---
